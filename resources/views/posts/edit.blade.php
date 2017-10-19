@@ -17,56 +17,108 @@
         });</script>
 @endsection
 @section('content')
+    <div class="inner">
     <div class="row">
-        {!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT', 'files'=>true])!!}
-        <div class="col-md-8">
-            {{Form::label('title', 'Title:')}}
+        <div class="col-lg-12">
+            <div class="box dark">
+                <header>
+                    <div class="icons"><i class="icon-edit"></i></div>
+                    <h5>Create New Post</h5>
+                </header>
+    <div id="div-1" class="accordion-body collapse in body">
+        {!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT', 'files'=>true,'class' => 'form-horizontal'])!!}
+
+            <div class="form-group">
+            {{Form::label('title', 'Title:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::text('title',null,array('class'=>'form-control','required'=>'','maxlength'=>'255'))}}
-            {{Form::label('slug', 'Slug:',['class'=>'form-spacing-top'])}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('slug', 'Slug:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255'))}}
-            {{Form::label('category_id','Category',['class'=>'form-spacing-top'])}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('category_id','Category',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
-            {{Form::label('subcategory_id','Sub Category',['class'=>'form-spacing-top'])}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('subcategory_id','Sub Category',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             <select name="subcategory_id" class="form-control" >
             </select>
-            {{Form::label('tags','Tags:',['class'=>'form-spacing-top'])}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('tags','Tags:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::select('tags[]',$tags,null,['class'=>'form-control select2-multi','multiple'=>'multiple'])}}
-            {{Form::label('featured_image','Upload Featured Image:')}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('featured_image','Upload Featured Image:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::file('featured_image')}}
-            {{Form::label('body', 'Post Body:',['class'=>'form-spacing-top'])}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('body', 'Post Body:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::textarea('body',null,array('class'=>'form-control','required'=>''))}}
-            {{Form::label('priority', 'Priority:')}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('priority', 'Priority:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::text('priority',null,array('class'=>'form-control'))}}
-            {{Form::label('metatagvalue', 'Metatag Value:')}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('metatagvalue', 'Metatag Value:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::text('metatagvalue',null,array('class'=>'form-control'))}}
-            {{Form::label('metatagdescription', 'Metatag Description:')}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('metatagdescription', 'Metatag Description:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::text('metatagdescription',null,array('class'=>'form-control'))}}
-            {{Form::label('approved', 'Approval:')}}
+            </div>
+            </div>
+            <div class="form-group">
+            {{Form::label('approved', 'Approval:',['class'=>'col-lg-3'])}}
+            <div class="col-lg-8">
             {{Form::select('approved', array('1' => 'Approved', '0' => 'Block'),null,array('class'=>'form-control'))}}
-        </div>
-        <div class="col-md-4">
-            <div class="well">
-                <dl class="dl-horizontal">
-                    <dt>Created At:</dt>
-                    <dd>{{date('d-M-Y',strtotime($post->created_at))}}</dd>
-                </dl>
-                <dl class="dl-horizontal">
-                    <dt>Updated At:</dt>
-                    <dd>{{date('d-M-Y',strtotime($post->updated_at))}}</dd>
-                </dl>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {!! Html::linkRoute('posts.show','Cancel', array($post->id), array('class'=>'btn btn-primary btn-block'))!!}
-                    </div>
-                    <div class="col-sm-6">
-                        {{Form::submit('Save Changes',array('class'=>'btn btn-success btn-block'))}}
+            </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="well text-center">
+                            <label class="btn btn-success btn-flat btn-rect">Created At:</label cla>
+                            <label class="btn btn-success btn-line btn-rect">{{date('d-M-Y',strtotime($post->created_at))}}</label>
 
+                            <label class="btn btn-primary btn-flat btn-rect">Updated At:</label>
+                            <label class="btn btn-primary btn-line btn-rect">{{date('d-M-Y',strtotime($post->updated_at))}}</label>
+
+
+                        <hr>
+                        <div class="row">
+                                {!! Html::linkRoute('posts.show','Cancel', array($post->id), array('class'=>'btn btn-primary btn-md'))!!}
+
+                                {{Form::submit('Save Changes',array('class'=>'btn btn-success btn-md'))}}
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         {!! Form::close()!!}
+    </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -75,6 +127,7 @@
             <br>
             <u>Default -></u>&nbsp;&nbsp;Latest Science News, Tech News, Physics News, Nasa News, Tricks And Hacks, Science Theory and Facts
         </div>
+    </div>
     </div>
 @endsection
 @section('scripts')

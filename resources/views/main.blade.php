@@ -36,7 +36,7 @@
   <!--END MENU SECTION -->
 <div id="content">
     @include('partials._messages')
-  {{Auth::check()? "Logged In":"Logged Out"}}
+
    @yield('content')
 
 
@@ -45,7 +45,7 @@
 </div>
   </div>
   <div id="footer">
-    <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
+    <p>&copy;  MMA &nbsp;2017 &nbsp;</p>
   </div>
     {{Html::script('assets/plugins/jquery-2.0.3.min.js')}}
     {{Html::script('assets/plugins/bootstrap/js/bootstrap.min.js')}}

@@ -16,56 +16,113 @@
         });</script>
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-md-2">
+    <div class="inner">
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-12">--}}
+                {{--<h3>Advance Form Elements</h3>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box dark">
+                    <header>
+                        <div class="icons"><i class="icon-edit"></i></div>
+                        <h5>Create New Post</h5>
+                    </header>
+                    <div id="div-1" class="accordion-body collapse in body">
+                        {!! Form::open(array('route' => 'posts.store','data-parsley-validate'=>'', 'files'=>true,'class' => 'form-horizontal')) !!}
+                        <div class="form-group">
+                            {{Form::label('title', 'Title:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('title',null,array('class'=>'form-control','required'=>'','maxlength'=>'255','id'=>'idTitle'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('slug', 'Slug:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255','id'=>'idSlug'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('category_id','Category',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('subcategory_id','Sub Category',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                <select name="subcategory_id" class="form-control" >
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('tags','Tags:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                                    @foreach($tags as $tag)
+                                        <option value='{{$tag->id}}'>{{$tag->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('featured_image','Upload Featured Image:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::file('featured_image')}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('body', 'Post Body:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::textarea('body',null,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('priority', 'Priority:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('priority',5,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('metatagvalue', 'Metatag Value:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('metatagvalue',null,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('metatagdescription', 'Metatag Description:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('metatagdescription',null,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('approved', 'Approval:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::select('approved', array('1' => 'Approved', '0' => 'Block'),null,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        {{Form::submit('Create Post',array('class'=>'btn btn-success', 'style'=>'margin-top:10px;'))}}
+                        {!! Form::close() !!}
 
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8">
-            <h1>Create New Post</h1>
-            {!! Form::open(array('route' => 'posts.store','data-parsley-validate'=>'', 'files'=>true)) !!}
-            {{Form::label('title', 'Title:')}}
-            {{Form::text('title',null,array('class'=>'form-control','required'=>'','maxlength'=>'255','id'=>'idTitle'))}}
-            {{Form::label('slug', 'Slug:')}}
-            {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255','id'=>'idSlug'))}}
-            {{Form::label('category_id','Category',['class'=>'form-spacing-top'])}}
-            {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
-            {{Form::label('subcategory_id','Sub Category',['class'=>'form-spacing-top'])}}
-            <select name="subcategory_id" class="form-control" >
-            </select>
-            {{Form::label('tags','Tags:',['class'=>'form-spacing-top'])}}
-            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
-                @foreach($tags as $tag)
-                    <option value='{{$tag->id}}'>{{$tag->name}}</option>
-                @endforeach
-            </select>
-            {{Form::label('featured_image','Upload Featured Image:')}}
-            {{Form::file('featured_image')}}
-            {{Form::label('body', 'Post Body:')}}
-            {{Form::textarea('body',null,array('class'=>'form-control'))}}
-            {{Form::label('priority', 'Priority:')}}
-            {{Form::text('priority',5,array('class'=>'form-control'))}}
-            {{Form::label('metatagvalue', 'Metatag Value:')}}
-            {{Form::text('metatagvalue',null,array('class'=>'form-control'))}}
-            {{Form::label('metatagdescription', 'Metatag Description:')}}
-            {{Form::text('metatagdescription',null,array('class'=>'form-control'))}}
-            {{Form::label('approved', 'Approval:')}}
-            {{Form::select('approved', array('1' => 'Approved', '0' => 'Block'),null,array('class'=>'form-control'))}}
-            {{Form::submit('Create Post',array('class'=>'btn btn-success', 'style'=>'margin-top:10px;'))}}
-            {!! Form::close() !!}
 
-        </div>
-        <div class="col-md-2">
 
+        <div class="row">
+            <div class="col-md-12">
+                <h4> META TAGS HINTS</h4> <br>
+                <u>GoogleAds Hint -></u>&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>
+                <u>Default -></u>&nbsp;&nbsp;Latest Science News, Tech News, Physics News, Nasa News, Tricks And Hacks, Science Theory and Facts
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4> META TAGS HINTS</h4> <br>
-            <u>GoogleAds Hint -></u>&nbsp;&nbsp;&nbsp;&nbsp;
-            <br>
-            <u>Default -></u>&nbsp;&nbsp;Latest Science News, Tech News, Physics News, Nasa News, Tricks And Hacks, Science Theory and Facts
-        </div>
-    </div>
+
+
 @endsection
 
 @section('scripts')

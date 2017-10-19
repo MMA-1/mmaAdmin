@@ -3,6 +3,7 @@
 @section('title','| View Posts')
 
 @section('content')
+	<div class="inner">
 <div class="row">
 	<div class="col-md-8">
 		@if(isset($post->image))
@@ -83,5 +84,5 @@
 		</div>
 	</div>
 </div> 
-
+	</div>
 @endsection
