@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email',50)->unique();
-            $table->string('contact',15);
-            $table->string('gender',7);
-            $table->integer('usertypeid');
-            $table->string('password',60);
-            $table->boolean('isblocked')->default(false);
+            $table->string('email');
+            $table->text('comment');
+            $table->boolean('approved');
+            $table->integer('post_id')->unsigned();
             $table->boolean('isdeleted')->default(false);
-            $table->rememberToken();
             $table->timestamps();
+
+
+        });
+        Schema::table('comments', function ($table){
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 
@@ -35,6 +37,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropForeign(['post_id']);
+        Schema::dropIfExists('comments');
     }
 }
