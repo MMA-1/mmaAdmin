@@ -6,6 +6,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('auth/login',['as'=>'login', 'uses'=>'Auth\LoginController@showLoginForm']);
     Route::post('auth/login','Auth\LoginController@Login');
     Route::get('auth/logout',['as'=>'logout', 'uses'=>'Auth\LoginController@logout']);
+    //Dashboard
+    Route::get('admin/dashboard', 'DashboardController@dashboardData')->name('admin.dashboard');
     //Registration Routes
     Route::get('auth/register','Auth\RegisterController@showRegistrationForm');
     Route::post('auth/register','Auth\RegisterController@register');

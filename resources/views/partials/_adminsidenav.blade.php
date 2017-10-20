@@ -10,8 +10,8 @@
 	</div>
 	<ul id="menu" class="collapse">
 		@if(Auth::check())
-		<li class="panel"> <a href="index.html" > <i class="icon-table"></i> Dashboard </a> </li>
-		<li class="panel active"> <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idpost"> <i class="icon-columns"></i> Posts <span class="pull-right"> <i class="icon-angle-left"></i> </span> &nbsp; <span class="label label-success">5</span>&nbsp; </a>
+		<li class="panel"> <a href="{{route('admin.dashboard')}}" > <i class="icon-table"></i> Dashboard </a> </li>
+		<li class="panel"> <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idpost"> <i class="icon-columns"></i> Posts <span class="pull-right"> <i class="icon-angle-left"></i> </span> &nbsp; <span class="label label-success">5</span>&nbsp; </a>
 			<ul class="collapse" id="idpost">
 				<li class=""><a href="{{route('posts.create')}}"><i class="icon-angle-right"></i>Create Post</a></li>
 				<li class=""><a href="{{route('posts.index')}}"><i class="icon-angle-right"></i>List Post</a></li>
