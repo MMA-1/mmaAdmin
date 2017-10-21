@@ -9,11 +9,15 @@ class Category extends Model
     protected $table = 'categories';
     public function posts()
     {
-        return$this->hasMany('App\Post');
+        return $this->hasMany('App\Post');
+    }
+    public function albums()
+    {
+        return $this->hasMany('App\Album');
     }
     public function subcategories()
     {
-        return$this->hasMany('App\SubCategory');
+        return $this->hasMany('App\SubCategory');
     }
 
 }

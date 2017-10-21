@@ -11,4 +11,8 @@ class SubCategory extends Model
     {
         return $this->belongsTo('App\Category');
     }
+    public function albums()
+    {
+        return $this->hasMany('App\Album');
+    }
 }
