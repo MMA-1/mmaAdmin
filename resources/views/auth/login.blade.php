@@ -52,7 +52,7 @@
         {!! Form::open() !!}
         <div class="col-md-offset-4 col-md-4">
             <div class="form-login">
-                <h4>Welcome back.</h4>
+                <h4>Welcome to Login.</h4>
                 {{Form::label('email', 'Email:')}}
                 {{Form::email('email',null,array('class'=>'form-control input-sm chat-input','required'=>'','maxlength'=>'255','id'=>'idTitle'))}}
                 {{Form::label('password', 'Password:')}}
