@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('email',100);
             $table->string('contact',20);
             $table->string('message',500);
+            $table->string('status',10)->default("UNSEEN");;
             $table->timestamps();
         });
     }

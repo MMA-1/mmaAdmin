@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Session;
 
@@ -20,7 +21,9 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('pages.message');
+        $msgs= DB::table('messages')->orderBy('id','desc')->get();
+
+        return view('message.index')->withMessages($msgs);
     }
 
     /**
@@ -78,7 +81,12 @@ $msg->subject('Contact message');
      */
     public function show($id)
     {
-        //
+        $msgs= Message::find($id);
+        DB::table('messages')
+            ->where('id', $id)
+            ->update(['status' => 'SEEN']);
+//dd($msgs);
+        return view('message.show')->withMsg($msgs);
     }
 
     /**

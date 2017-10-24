@@ -38,7 +38,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('about', 'PagesController@getAbout');
 
     Route::get('/', 'BlogController@getShayeriForHome');
+
     Route::resource('posts', 'PostController');
+
+    Route::resource('mediatypes', 'MediaTypesController');
+
+    Route::resource('albums', 'AlbumsController');
+
+    Route::resource('artists', 'ArtistsController');
+
     Route::post('postss',['uses'=> 'PostController@filter','as'=>'posts.filter']);
     //Route::resource('gallery', 'PhotoGalleryController');
     Route::post('gallery',['uses'=>'PhotoGalleryController@store', 'as'=>'gallery.store']);
