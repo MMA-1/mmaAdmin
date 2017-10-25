@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MediaType;
 use Illuminate\Http\Request;
 
 class MediaTypesController extends Controller
@@ -23,7 +24,9 @@ class MediaTypesController extends Controller
      */
     public function create()
     {
-        //
+        $mediatype = MediaType::where('isdeleted', 0)->get();
+        //dd($mediatype);
+        return view('mediatype.create')->withMma($mediatype);
     }
 
     /**
@@ -34,7 +37,17 @@ class MediaTypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, array(
+            'medianame' => 'required|max:255',
+            'slug' => 'required|alpha_dash|min:5|max:70|unique:media_types,slug'
+        ));
+        $mediatype = new MediaType;
+        $mediatype->medianame = $request->medianame;
+        $mediatype->slug = $request->slug;
+        $mediatype->isdeleted = 0;
+        $mediatype->save();
+        return redirect()->route('mediatypes.create');
+
     }
 
     /**
