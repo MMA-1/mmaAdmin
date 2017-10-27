@@ -36,13 +36,10 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-6">
-					{!! Html::linkRoute('gallery.edit','Edit', array($artist->id), array('class'=>'btn btn-primary btn-block'))!!}
+					{!! Html::linkRoute('artists.edit','Edit', array($artist->id), array('class'=>'btn btn-primary btn-block'))!!}
 				</div>
 				<div class="col-sm-6">
-
-					{!! Form::open(['route'=>['gallery.destroy',$artist->id],'method'=>'DELETE']) !!}
-					{!! Form::submit('Delete',['class'=>'btn btn-danger btn-block']) !!}
-					{!! Form::close() !!}
+					<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteModel">DELETE</button>
 
 				</div>
 			</div>
@@ -55,4 +52,29 @@
 	</div>
 </div> 
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModel" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Please Confirm !</h4>
+				</div>
+				<div class="modal-body">
+					<p>Do you really want to delete this record?</p>
+				</div>
+				<div class="modal-footer">
+					{!! Form::open(['route'=>['artists.destroy',$artist->id],'method'=>'DELETE']) !!}
+					{!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					{!! Form::close() !!}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 @endsection

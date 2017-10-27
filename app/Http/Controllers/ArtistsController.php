@@ -41,7 +41,7 @@ class ArtistsController extends Controller
     {
         $this->validate($request, array(
             'artistname' => 'required|max:70',
-            'slug' => 'required|alpha_dash|min:5|max:70|unique:posts,slug',
+            'slug' => 'required|alpha_dash|min:5|max:70|unique:artists,slug',
             'image' => 'required'
         ));
 
@@ -86,7 +86,8 @@ class ArtistsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $artist = Artist::find($id);
+        return view('artist.edit')->withArtist($artist);
     }
 
     /**
@@ -98,7 +99,37 @@ class ArtistsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $artst = Artist::find($id);
+        if ($request->input('slug') == $artst->slug) {
+            $this->validate($request, array(
+                'artistname' => 'required|max:70',
+                'slug' => 'required|alpha_dash|min:5|max:70',
+            ));
+        } else {
+            $this->validate($request, array(
+                'artistname' => 'required|max:70',
+                'slug' => 'required|alpha_dash|min:5|max:70|unique:artists,slug'
+            ));
+        }
+        //dd($request);
+        $artist =Artist::find($id);
+        $artist->artistname = $request->artistname;
+        $artist->slug = $request->slug;
+        $artist->contact = $request->contact;
+        $artist->description = $request->description;
+        $artist->priority = $request->priority;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/artistsimages/' . $filename);
+            Image::make($image)->save($location);
+            $artist->image = $filename;
+        }
+
+        $artist->save();
+        Session::flash('success', 'The record is saved.');
+        return redirect()->route('artists.show', $artist->id);
     }
 
     /**
@@ -109,6 +140,10 @@ class ArtistsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $artist = Artist::find($id);
+        $artist->isdeleted = true;
+        $artist->save();
+        Session::flash('success', 'The record is successfully deleted.');
+        return redirect()->route('artists.index');
     }
 }
