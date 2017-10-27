@@ -56,6 +56,8 @@
             </li>
             <li class="panel"><a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idartistmasters"> <i class="icon-user"></i> Artist Master <span class="pull-right"> <i class="icon-angle-left"></i> </span></a>
                 <ul class="collapse" id="idartistmasters">
+                    <li class=""><a href="{{route('artists.index')}}"><i class="icon-angle-right"></i>List Artist</a>
+                    </li>
                     <li class=""><a href="{{route('artists.create')}}"><i class="icon-angle-right"></i>Create Artist</a>
                     </li>
                 </ul>

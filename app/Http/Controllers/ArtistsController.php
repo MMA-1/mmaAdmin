@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class ArtistsController extends Controller
 {
@@ -13,7 +16,9 @@ class ArtistsController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::where('isdeleted', 0)->get();
+       // dd($artists);
+        return view('artist.index')->withMma($artists);
     }
 
     /**
@@ -23,7 +28,7 @@ class ArtistsController extends Controller
      */
     public function create()
     {
-        //
+        return view('artist.create');
     }
 
     /**
@@ -34,7 +39,31 @@ class ArtistsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, array(
+            'artistname' => 'required|max:70',
+            'slug' => 'required|alpha_dash|min:5|max:70|unique:posts,slug',
+            'image' => 'required'
+        ));
+
+        //dd($request);
+        $artist = new Artist;
+        $artist->artistname = $request->artistname;
+        $artist->slug = $request->slug;
+        $artist->contact = $request->contact;
+        $artist->description = $request->description;
+        $artist->priority = $request->priority;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/artistsimages/' . $filename);
+            Image::make($image)->save($location);
+            $artist->image = $filename;
+        }
+
+        $artist->save();
+        Session::flash('success', 'The record is saved.');
+        return redirect()->route('artists.show', $artist->id);
+
     }
 
     /**
@@ -45,7 +74,8 @@ class ArtistsController extends Controller
      */
     public function show($id)
     {
-        //
+        $artist = Artist::find($id);
+        return view('artist.show')->withArtist($artist);
     }
 
     /**
