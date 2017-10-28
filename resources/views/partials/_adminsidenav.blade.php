@@ -64,6 +64,8 @@
             </li>
             <li class="panel"><a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idalbummasters"> <i class="icon-book"></i> Album Master <span class="pull-right"> <i class="icon-angle-left"></i> </span></a>
                 <ul class="collapse" id="idalbummasters">
+                    <li class=""><a href="{{route('albums.index')}}"><i class="icon-angle-right"></i>List Album</a>
+                    </li>
                     <li class=""><a href="{{route('albums.create')}}"><i class="icon-angle-right"></i>Create Album</a>
                     </li>
                 </ul>

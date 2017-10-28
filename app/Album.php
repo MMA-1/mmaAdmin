@@ -18,4 +18,8 @@ class Album extends Model
     {
         return $this->hasMany('App\media');
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

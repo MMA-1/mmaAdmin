@@ -22,6 +22,10 @@ class CreateAlbumsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('category_id')->nullable()->unsigned();
             $table->integer('subcategory_id')->nullable()->unsigned();
+            $table->boolean('approved')->default(false);
+            $table->string('metatagvalue',60)->nullable();
+            $table->string('metatagdescription',150)->nullable();
+            $table->integer('viewcount')->default(10);
             $table->boolean('isdeleted')->default(false);
             $table->integer('priority')->default(5);
             $table->timestamps();

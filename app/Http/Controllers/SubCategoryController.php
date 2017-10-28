@@ -62,9 +62,16 @@ class SubCategoryController extends Controller
     }
     public function subcategoryAjax($id)
     {
-        $subcategories = DB::table("subcategories")
-            ->where("category_id",$id)
-            ->pluck("name","id");
+        if($id!=null && $id!='' && $id!=0 ) {
+            $subcategories = DB::table("subcategories")
+                ->where("category_id", $id)
+                ->pluck("name", "id");
+        }
+        else{
+            $subcategories = DB::table("subcategories")
+                ->pluck("name", "id");
+        }
+        //dd($subcategories);
         return json_encode($subcategories);
     }
     public function show($id)

@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title','| Create New Post')
+@section('title','| Create New Album')
 @section('stylesheet')
     {!! Html::style('css/parsley.css') !!}
     {!! Html::style('css/select2.min.css') !!}
@@ -27,20 +27,26 @@
                 <div class="box dark">
                     <header>
                         <div class="icons"><i class="icon-edit"></i></div>
-                        <h5>Create New Post</h5>
+                        <h5>Create New 	Albums</h5>
                     </header>
                     <div id="div-1" class="accordion-body collapse in body">
-                        {!! Form::open(array('route' => 'posts.store','data-parsley-validate'=>'', 'files'=>true,'class' => 'form-horizontal')) !!}
+                        {!! Form::open(array('route' => 'albums.store','data-parsley-validate'=>'', 'files'=>true,'class' => 'form-horizontal')) !!}
                         <div class="form-group">
-                            {{Form::label('title', 'Title:',['class'=>'col-lg-3'])}}
+                            {{Form::label('albumtitle', 'Album Title:',['class'=>'col-lg-3'])}}
                             <div class="col-lg-8">
-                                {{Form::text('title',null,array('class'=>'form-control','required'=>'','maxlength'=>'255','id'=>'idTitle'))}}
+                                {{Form::text('albumtitle',null,array('class'=>'form-control','required'=>'','maxlength'=>'255','id'=>'idTitle'))}}
                             </div>
                         </div>
                         <div class="form-group">
                             {{Form::label('slug', 'Slug:',['class'=>'col-lg-3'])}}
                             <div class="col-lg-8">
                                 {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255','id'=>'idSlug'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('year', 'Year:',['class'=>'col-lg-3'])}}
+                            <div class="col-lg-8">
+                                {{Form::text('year',null,array('class'=>'form-control','required'=>'','maxlength'=>'255'))}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,15 +73,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {{Form::label('featured_image','Upload Featured Image:',['class'=>'col-lg-3'])}}
+                            {{Form::label('album_image','Upload Album Image:',['class'=>'col-lg-3'])}}
                             <div class="col-lg-8">
-                                {{Form::file('featured_image')}}
+                                {{Form::file('album_image')}}
                             </div>
                         </div>
                         <div class="form-group">
-                            {{Form::label('body', 'Post Body:',['class'=>'col-lg-3'])}}
+                            {{Form::label('description', 'Album Description:',['class'=>'col-lg-3'])}}
                             <div class="col-lg-8">
-                                {{Form::textarea('body',null,array('class'=>'form-control'))}}
+                                {{Form::textarea('description',null,array('class'=>'form-control'))}}
                             </div>
                         </div>
                         <div class="form-group">
