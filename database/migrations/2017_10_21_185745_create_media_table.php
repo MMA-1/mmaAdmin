@@ -15,13 +15,15 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mediatitle',150)->default('Unknown Album.');
+            $table->string('mediatitle',150)->default('Unknown Media.');
             $table->string('slug',150)->unique();
             $table->text('description');
             $table->string('mediaurl');
             $table->integer('mediatype_id')->nullable()->unsigned();
             $table->integer('artist_id')->unsigned();
             $table->integer('album_id')->unsigned();
+            $table->string('metatagvalue')->nullable();
+            $table->string('metatagdescription')->nullable();
             $table->integer('addedby')->nullable()->unsigned();
             $table->integer('updatedby')->nullable()->unsigned();
             $table->boolean('isdeleted')->default(false);

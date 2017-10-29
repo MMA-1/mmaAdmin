@@ -49,6 +49,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('fateha', 'FatehaController');
 
+    Route::resource('media', 'MediaController');
+
     Route::post('postss',['uses'=> 'PostController@filter','as'=>'posts.filter']);
     //Route::resource('gallery', 'PhotoGalleryController');
     Route::post('gallery',['uses'=>'PhotoGalleryController@store', 'as'=>'gallery.store']);

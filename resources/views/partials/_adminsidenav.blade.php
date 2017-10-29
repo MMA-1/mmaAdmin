@@ -70,6 +70,14 @@
                     </li>
                 </ul>
             </li>
+            <li class="panel"><a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idmedia"> <i class="icon-play-circle"></i> Media <span class="pull-right"> <i class="icon-angle-left"></i> </span></a>
+                <ul class="collapse" id="idmedia">
+                    <li class=""><a href="{{route('media.index')}}"><i class="icon-angle-right"></i>List Media</a>
+                    </li>
+                    <li class=""><a href="{{route('media.create')}}"><i class="icon-angle-right"></i>Create Media</a>
+                    </li>
+                </ul>
+            </li>
             <li class="panel"><a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idfateha"> <i class="icon-book"></i> Fateha & News <span class="pull-right"> <i class="icon-angle-left"></i> </span></a>
                 <ul class="collapse" id="idfateha">
                     <li class=""><a href="{{route('fateha.index')}}"><i class="icon-angle-right"></i>List Fateha & News</a>
