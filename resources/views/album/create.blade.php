@@ -108,7 +108,7 @@
                                 {{Form::select('approved', array('1' => 'Approved', '0' => 'Block'),null,array('class'=>'form-control'))}}
                             </div>
                         </div>
-                        {{Form::submit('Create Post',array('class'=>'btn btn-success', 'style'=>'margin-top:10px;'))}}
+                        {{Form::submit('Create Album',array('class'=>'btn btn-success', 'style'=>'margin-top:10px;'))}}
                         {!! Form::close() !!}
 
 

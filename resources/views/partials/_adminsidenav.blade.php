@@ -70,6 +70,14 @@
                     </li>
                 </ul>
             </li>
+            <li class="panel"><a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#idfateha"> <i class="icon-book"></i> Fateha & News <span class="pull-right"> <i class="icon-angle-left"></i> </span></a>
+                <ul class="collapse" id="idfateha">
+                    <li class=""><a href="{{route('fateha.index')}}"><i class="icon-angle-right"></i>List Fateha & News</a>
+                    </li>
+                    <li class=""><a href="{{route('fateha.create')}}"><i class="icon-angle-right"></i>Create Fateha & News</a>
+                    </li>
+                </ul>
+            </li>
             <li><a href="{{route('logout')}}">Logout</a></li>
         @else
             <a href="{{route('login')}}" class="btn btn-success pull-right">Login</a></li>
