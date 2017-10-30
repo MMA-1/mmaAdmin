@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\Artist;
+use App\Media;
 use App\MediaType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MediaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -28,7 +30,7 @@ class MediaController extends Controller
     {
         $mediatypes = MediaType::where('isdeleted', 0)->get();
         $mdtps = array();
-        $mdtps[''] = 'Media Type';
+        $mdtps[''] = 'Select Media Type';
         foreach ($mediatypes as $mediatype) {
             $mdtps[$mediatype->id] = $mediatype->medianame;
         }
@@ -56,7 +58,36 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, array(
+            'mediatitle' => 'required|max:255',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:media,slug',
+            'mediatype_id' => 'required|integer',
+            'artist_id' => 'required|integer',
+            'album_id' => 'required|integer',
+            'mediaurl' => 'required|max:255',
+            'metatagvalue' => 'max:255',
+            'metatagdescription' => 'max:255'
+        ));
+
+        $media = new Media;
+        $media->mediatitle = $request->mediatitle;
+        $media->slug = $request->slug;
+        $media->mediatype_id = $request->mediatype_id;
+        $media->artist_id = $request->artist_id;
+        $media->album_id = $request->album_id;
+        $media->mediaurl = $request->mediaurl;
+        $media->description = clean($request->description,'youtube');
+        $media->metatagvalue = $request->metatagvalue;
+        $media->metatagdescription = $request->metatagdescription;
+        $media->priority = $request->priority;
+        $media->addedby = Auth::user()->id;
+        $media->viewcount = 0;
+
+
+        $media->save();
+
+        Session::flash('success', 'The record is saved.');
+        return redirect()->route('media.show', $media->id);
     }
 
     /**
@@ -67,7 +98,8 @@ class MediaController extends Controller
      */
     public function show($id)
     {
-        //
+        $media = Media::find($id);
+        return view('media.show')->withMedia($media);
     }
 
     /**

@@ -12,11 +12,10 @@ use Intervention\Image\Facades\Image;
 
 class AlbumsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $albums = Album::where('isdeleted', false)->orderBy('priority', 'desc')->orderBy('id', 'desc')->get();

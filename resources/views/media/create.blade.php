@@ -24,7 +24,7 @@
                         <h5>Create New Media</h5>
                     </header>
                     <div id="div-1" class="accordion-body collapse in body">
-                        {!! Form::open(array('route' => 'posts.store','data-parsley-validate'=>'', 'files'=>true,'class' => 'form-horizontal')) !!}
+                        {!! Form::open(array('route' => 'media.store','data-parsley-validate'=>'', 'class' => 'form-horizontal')) !!}
                         <div class="form-group">
                             {{Form::label('mediatitle', 'Media Title:',['class'=>'col-lg-3'])}}
                             <div class="col-lg-8">

@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class FatehaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $fateha = Fateha::where('isdeleted', false)->orderBy('priority', 'desc')->orderBy('id', 'desc')->get();

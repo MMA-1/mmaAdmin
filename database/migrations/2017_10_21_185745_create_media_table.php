@@ -28,6 +28,7 @@ class CreateMediaTable extends Migration
             $table->integer('updatedby')->nullable()->unsigned();
             $table->boolean('isdeleted')->default(false);
             $table->integer('priority')->default(5);
+            $table->integer('viewcount')->default(0);
             $table->timestamps();
         });
     }
