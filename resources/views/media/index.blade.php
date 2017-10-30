@@ -17,29 +17,29 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Ctgry</th>
-                                <th>Tags</th>
-                                <th>Status</th>
-                                <th>Created At</th>
+                                <th>Media Title</th>
+                                <th>Album</th>
+                                <th>Media Type</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Created On</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($posts as $post)
+                            @foreach($media as $mda)
                                 <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{$post->category->name }}</td>
-                                    <td>
-                                        @foreach($post->tags as $tag)
-                                            <span class="label label-default">{{$tag->name}}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>{{$post->approved ? "Approved":"Blocked"}}</td>
-                                    <td>{{ date('d-M-Y', strtotime($post->created_at)) }}</td>
-                                    <td><a href="{{route('posts.show',$post->id)}}" class="btn btn-success btn-sm">View</a><a
-                                                href="{{route('posts.edit',$post->id)}}" class="btn btn-danger btn-sm">Edit</a></td>
+                                    <td>{{ $mda->id }}</td>
+                                    <td>{{ $mda->mediatitle }}</td>
+                                    <td>{{ $mda->album->albumtitle }}</td>
+                                    <td>{{ $mda->mediatype->medianame }}</td>
+                                    <td>{{substr(strip_tags($mda->description),0,50)}}</td>
+                                    <td>{{ $mda->album->category->name }}</td>
+                                    <td>{{ $mda->priority }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($mda->created_at)) }}</td>
+                                    <td><a href="{{route('media.show',$mda->id)}}" class="btn btn-success btn-sm">View</a><a
+                                                href="{{route('media.edit',$mda->id)}}" class="btn btn-danger btn-sm">Edit</a></td>
                                 </tr>
                             @endforeach
 

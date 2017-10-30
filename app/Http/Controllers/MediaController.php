@@ -18,7 +18,8 @@ class MediaController extends Controller
     }
     public function index()
     {
-        //
+        $media = Media::where('isdeleted', false)->orderBy('album_id', 'desc')->orderBy('priority', 'desc')->orderBy('id', 'desc')->get();
+        return view('media.index')->withMedia($media);
     }
 
     /**
