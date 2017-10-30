@@ -22,11 +22,6 @@ class MediaController extends Controller
         return view('media.index')->withMedia($media);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $mediatypes = MediaType::where('isdeleted', 0)->get();
@@ -51,12 +46,6 @@ class MediaController extends Controller
         return view('media.create')->withMediatypes($mdtps)->withArtists($artis)->withAlbums($albms);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, array(
@@ -91,49 +80,29 @@ class MediaController extends Controller
         return redirect()->route('media.show', $media->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $media = Media::find($id);
         return view('media.show')->withMedia($media);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $media = Media::find($id);
+        $media->isdeleted = true;
+        $media->updatedby = Auth::user()->id;
+        $media->save();
+        Session::flash('success', 'The record is successfully deleted.');
+        return redirect()->route('media.index');
     }
 }
