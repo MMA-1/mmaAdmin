@@ -3,7 +3,16 @@
 @section('title','| Edit Posts')
 @section('stylesheet')
     {!! Html::style('css/parsley.css') !!}
-    {!! Html::style('css/select2.min.css') !!}
+    {!! Html::style('assets/plugins/chosen/chosen.min.css') !!}
+    <style>
+        .chosen-container-single .chosen-single {
+            padding: 2px 0 0 10px;
+            height: 30px;
+        }
+        .chosen-container{
+            font-size: inherit;
+        }
+    </style>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=35dmlnmnknqahkym6zsnyi80y13rnq79i5456gpv8prnyhsi"></script>
 
     <script>tinymce.init({ selector:'textarea',
@@ -23,91 +32,84 @@
             <div class="box dark">
                 <header>
                     <div class="icons"><i class="icon-edit"></i></div>
-                    <h5>Create New Post</h5>
+                    <h5>Edit Media</h5>
                 </header>
     <div id="div-1" class="accordion-body collapse in body">
-        {!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT', 'files'=>true,'class' => 'form-horizontal'])!!}
+        {!! Form::model($media,['route'=>['media.update',$media->id],'method'=>'PUT','class' => 'form-horizontal'])!!}
 
-            <div class="form-group">
-            {{Form::label('title', 'Title:',['class'=>'col-lg-3'])}}
+        <div class="form-group">
+            {{Form::label('mediatitle', 'Media Title:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::text('title',null,array('class'=>'form-control','required'=>'','maxlength'=>'255'))}}
+                {{Form::text('mediatitle',null,array('class'=>'form-control','required'=>'','maxlength'=>'150','id'=>'idTitle'))}}
             </div>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             {{Form::label('slug', 'Slug:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255'))}}
+                {{Form::text('slug',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'150','id'=>'idSlug'))}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('category_id','Category',['class'=>'col-lg-3'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('mediaurl', 'Media Url:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
+                {{Form::text('mediaurl',null,array('class'=>'form-control','required'=>'','minlength'=>'5','maxlength'=>'255'))}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('subcategory_id','Sub Category',['class'=>'col-lg-3'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('mediatype_id','Media Type',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            <select name="subcategory_id" class="form-control" >
-            </select>
+                {{Form::select('mediatype_id',$mediatypes,null,['class'=>'form-control'])}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('tags','Tags:',['class'=>'col-lg-3'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('artist_id','Artist',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::select('tags[]',$tags,null,['class'=>'form-control select2-multi','multiple'=>'multiple'])}}
+                {{Form::select('artist_id',$artists,null,['class'=>'form-control chzn-select','tabindex'=>'2','data-placeholder'=>'Select Artist'])}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('featured_image','Upload Featured Image:',['class'=>'col-lg-3'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('album_id','Album',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::file('featured_image')}}
+                {{Form::select('album_id',$albums,null,['class'=>'form-control'])}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('body', 'Post Body:',['class'=>'col-lg-3'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('description', 'Description:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::textarea('body',null,array('class'=>'form-control','required'=>''))}}
+                {{Form::textarea('description',null,array('class'=>'form-control'))}}
             </div>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             {{Form::label('priority', 'Priority:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::text('priority',null,array('class'=>'form-control'))}}
+                {{Form::text('priority',5,array('class'=>'form-control'))}}
             </div>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             {{Form::label('metatagvalue', 'Metatag Value:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::text('metatagvalue',null,array('class'=>'form-control'))}}
+                {{Form::text('metatagvalue',null,array('class'=>'form-control'))}}
             </div>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             {{Form::label('metatagdescription', 'Metatag Description:',['class'=>'col-lg-3'])}}
             <div class="col-lg-8">
-            {{Form::text('metatagdescription',null,array('class'=>'form-control'))}}
+                {{Form::text('metatagdescription',null,array('class'=>'form-control'))}}
             </div>
-            </div>
-            <div class="form-group">
-            {{Form::label('approved', 'Approval:',['class'=>'col-lg-3'])}}
-            <div class="col-lg-8">
-            {{Form::select('approved', array('1' => 'Approved', '0' => 'Block'),null,array('class'=>'form-control'))}}
-            </div>
-            </div>
+        </div>
             <div class="form-group">
                 <div class="col-md-12">
                     <div class="well text-center">
-                            <label class="btn btn-success btn-flat btn-rect">Created At:</label cla>
-                            <label class="btn btn-success btn-line btn-rect">{{date('d-M-Y',strtotime($post->created_at))}}</label>
+                            <label class="btn btn-success btn-flat btn-rect">Created At:</label>
+                            <label class="btn btn-success btn-line btn-rect">{{date('d-M-Y',strtotime($media->created_at))}}</label>
 
                             <label class="btn btn-primary btn-flat btn-rect">Updated At:</label>
-                            <label class="btn btn-primary btn-line btn-rect">{{date('d-M-Y',strtotime($post->updated_at))}}</label>
+                            <label class="btn btn-primary btn-line btn-rect">{{date('d-M-Y',strtotime($media->updated_at))}}</label>
 
 
                         <hr>
                         <div class="row">
-                                {!! Html::linkRoute('posts.show','Cancel', array($post->id), array('class'=>'btn btn-primary btn-md'))!!}
+                                {!! Html::linkRoute('media.show','Cancel', array($media->id), array('class'=>'btn btn-primary btn-md'))!!}
 
                                 {{Form::submit('Save Changes',array('class'=>'btn btn-success btn-md'))}}
 
@@ -125,16 +127,22 @@
             <h4> META TAGS HINTS</h4> <br>
             <u>GoogleAds Hint -></u>&nbsp;&nbsp;&nbsp;&nbsp;
             <br>
-            <u>Default -></u>&nbsp;&nbsp;Latest Science News, Tech News, Physics News, Nasa News, Tricks And Hacks, Science Theory and Facts
+            <u>Default -></u>&nbsp;&nbsp;
         </div>
     </div>
     </div>
 @endsection
 @section('scripts')
     {!! Html::script('js/parsley.min.js') !!}
-    {!! Html::script('js/select2.min.js') !!}
-    <script type="text/javascript">
-        $(".select2-multi").select2();
+    {!! Html::script('assets/plugins/inputlimiter/jquery.inputlimiter.1.3.1.min.js') !!}
+    {!! Html::script('assets/plugins/chosen/chosen.jquery.min.js') !!}
+    {!! Html::script('assets/plugins/tagsinput/jquery.tagsinput.min.js') !!}
+    {!! Html::script('assets/plugins/autosize/jquery.autosize.min.js') !!}
+    <script>
+        $(".chzn-select").chosen();
+        $(".chzn-select-deselect").chosen({
+            allow_single_deselect: true
+        });
     </script>
     <script type="text/javascript">
 
@@ -152,31 +160,5 @@
                 .replace(/-+$/, '');            // Trim - from end of text
         }
 
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('select[name="category_id"]').on('change', function() {
-                var categoryid = $(this).val();
-                if(categoryid) {
-                    $.ajax({
-                        url: '/subcategories/ajax/'+categoryid,
-                        type: "GET",
-                        dataType: "json",
-                        success:function(data) {
-
-
-                            $('select[name="subcategory_id"]').empty();
-                            $('select[name="subcategory_id"]').append('<option value="">Select Option</option>');
-                            $.each(data, function(key, value) {
-                                $('select[name="subcategory_id"]').append('<option value="'+ key +'">'+ value +'</option>');
-                            });
-
-                        }
-                    });
-                }else{
-                    $('select[name="subcategory_id"]').empty();
-                }
-            });
-        });
     </script>
 @endsection

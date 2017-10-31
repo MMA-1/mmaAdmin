@@ -17,9 +17,9 @@ class CreateArtistsTable extends Migration
             $table->increments('id');
             $table->string('artistname',100)->default('Unknown Artist.');
             $table->string('slug',100)->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('contact',20)->default('000000000000');
+            $table->string('contact',20)->nullable()->default('000000000000');
             $table->boolean('isdeleted')->default(false);
             $table->integer('priority')->default(5);
             $table->timestamps();
