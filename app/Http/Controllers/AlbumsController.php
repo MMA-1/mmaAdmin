@@ -140,6 +140,7 @@ class AlbumsController extends Controller
                 'albumtitle' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255',
                 'category_id' => 'required|integer',
+                'subcategory_id' => 'required|integer',
                 'metatagvalue' => 'max:255',
                 'metatagdescription' => 'max:255'
             ));
@@ -149,6 +150,7 @@ class AlbumsController extends Controller
                 'albumtitle' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:albums,slug',
                 'category_id' => 'required|integer',
+                'subcategory_id' => 'required|integer',
                 'metatagvalue' => 'max:255',
                 'metatagdescription' => 'max:255'
             ));
