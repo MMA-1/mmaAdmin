@@ -37,7 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('contact', 'PagesController@getContact');
     Route::get('about', 'PagesController@getAbout');
 
-    Route::get('/', 'BlogController@getShayeriForHome');
+    //Route::get('/', 'BlogController@getShayeriForHome');
+    Route::get('/', 'Auth\LoginController@showLoginForm');
 
     Route::resource('posts', 'PostController');
 

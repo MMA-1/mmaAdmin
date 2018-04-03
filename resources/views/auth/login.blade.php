@@ -49,6 +49,9 @@
 
 <div class="container">
     <div class="row">
+        @include('partials._messages')
+    </div>
+    <div class="row">
         {!! Form::open() !!}
         <div class="col-md-offset-4 col-md-4">
             <div class="form-login">

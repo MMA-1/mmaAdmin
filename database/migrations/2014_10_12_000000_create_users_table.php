@@ -23,8 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('password',60);
             $table->boolean('isblocked')->default(false);
             $table->boolean('isdeleted')->default(false);
+            $table->string('userdetails',200)->default('');
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

@@ -40,7 +40,12 @@
 			</dl>
 			<dl class="dl-horizontal">
 				<labe>Sub Category: </labe>
-				<p><a href="#">{{$album->subcategory->name}}</a></p>
+				<p><a href="#">
+						@if($album->subcategory)
+						{{$album->subcategory->name}}
+						@endif
+					</a>
+				</p>
 			</dl>
 			<dl class="dl-horizontal">
 				<dt>Created At: </dt>

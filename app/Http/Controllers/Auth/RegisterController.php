@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/auth/login';
 
     /**
      * Create a new controller instance.
@@ -72,6 +72,9 @@ class RegisterController extends Controller
             'isblocked' => false,
             'isdeleted' => false,
             'password' => bcrypt($data['password']),
+            'userdetails' => "mmaissuperadmindetailisnothingbut"+$data['password']+"toloremipsum",
+
+
         ]);
     }
 }
